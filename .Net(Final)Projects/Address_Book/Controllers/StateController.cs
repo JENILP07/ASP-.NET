@@ -1,0 +1,66 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
+using System.Data;
+using Address_Book.Models;
+
+namespace Address_Book.Controllers
+{
+    public class StateController : Controller
+    {
+        private IConfiguration configuration;
+
+        public StateController(IConfiguration _configuration)
+        {
+            configuration = _configuration;
+        }
+        public IActionResult StateList()
+        {
+            string connectionString = this.configuration.GetConnectionString("ConnectionString");
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            SqlCommand command = connection.CreateCommand();
+            command.CommandType = CommandType.StoredProcedure;
+            command.CommandText = "SP_GetAllStates";
+            SqlDataReader reader = command.ExecuteReader();
+            DataTable table = new DataTable();
+            table.Load(reader);
+            return View(table);
+        }
+        public IActionResult StateDelete(int StateID)
+        {
+            try
+            {
+                string connectionString = configuration.GetConnectionString("ConnectionString");
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = connection.CreateCommand();
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandText = "SP_DeleteState";
+                    command.Parameters.Add("@StateID", SqlDbType.Int).Value = StateID;
+
+
+                    command.ExecuteNonQuery();
+                }
+
+                TempData["SuccessMessage"] = "State deleted successfully.";
+                return RedirectToAction("StateList");
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = "An error occurred while deleting the State: " + ex.Message;
+                return RedirectToAction("StateList");
+            }
+        }
+
+        public IActionResult AddState()
+        {
+            return View();
+        }
+
+        public IActionResult SaveState(StateModel m)
+        {
+            return View(m);
+        }
+    }
+}

@@ -1,0 +1,91 @@
+﻿@model DataTable
+@using System.Data
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>State List</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">State</li>
+                <li class="breadcrumb-item active">State List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">State List</h5>
+
+                        <!-- Style for Add button -->
+                        <link rel="stylesheet" href="~/assets/Extra/AddButton.css" />
+                        <!--End Style -->
+                        <a asp-controller="State" asp-action="AddState">
+                            <button style="float:right; height:35px; margin-right:10px">
+                                Add State
+                                <div class="arrow-wrapper">
+                                    <div class="arrow"></div>
+                                </div>
+                            </button>
+                        </a><!--End Button -->
+                        <br /><br />
+
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  
+                                    <th>StateID</th>
+                                    <th>CountryID</th>
+                                    <th>StateName</th>
+                                    <th>StateCode</th>
+          
+                                    <th>CreationDate</th>
+                                    <th>UserID</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow datarow in Model.Rows)
+                                {
+                                    <tr>
+                                
+                                        <td>@datarow["StateID"]</td>
+                                        <td>@datarow["CountryID"]</td>
+                                        <td>@datarow["StateName"]</td>
+                                        <td>@datarow["StateCode"]</td>
+                                  
+                                        <td>@datarow["CreationDate"]</td>
+                                        <td>@datarow["UserID"]</td>
+                                        <td>
+                                            <form method="post" asp-controller="State" asp-action="StateDelete">
+                                                <input type="hidden" name="StateID" value="@datarow["StateID"]" />
+                                                <button type="submit" onclick=" alrt()" class="btn btn-outline-danger btn-xs">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <script>
+        function alrt() {
+            alert('Sure!')
+        }
+    </script>
+
+</main><!-- End #main -->
+ 

@@ -1,0 +1,82 @@
+﻿@model DataTable
+@using System.Data
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>User List</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">User</li>
+                <li class="breadcrumb-item active">User List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <i class="bi bi-exclamation-octagon me-1"></i>
+        <span class="alert alert-danger alert-dismissible fade show text-dark">@TempData["ErrorMessage"]</span>
+        <i class="btn-close" data-bs-dismiss="alert" aria-label="Close"></i>
+    </div>
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">User List</h5>
+
+                        <!-- Style for Add button -->
+                        <link rel="stylesheet" href="~/assets/Extra/AddButton.css" />
+                        <!--End Style -->
+                        <a asp-controller="User" asp-action="AddUser">
+                            <button style="float:right; height:35px; margin-right:10px">
+                                Add User
+                                <div class="arrow-wrapper">
+                                    <div class="arrow"></div>
+                                </div>
+                            </button>
+                        </a><!--End Button -->
+                        <br /><br />
+
+                        <!-- Table with stripped rows -->
+                        <table class="table datatable table-hover table-striped">
+                            <thead>
+                                <tr>
+                                    <th>UserID</th>
+                                    <th>UserName</th>
+                                    <th>MobileNo</th>
+                                    <th>EmailID</th>
+                                    <th>CreationDate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow row in Model.Rows)
+                                {
+                                    <tr>
+                                        <td>@row["UserID"]</td>
+                                        <td>@row["UserName"]</td>
+                                        <td>@row["MobileNo"]</td>
+                                        <td>@row["EmailID"]</td>
+                                        <td>@row["CreationDate"]</td>
+                                        <td>
+                                            <a asp-controller="User" asp-action="UserDelete" asp-route-UserID="@row["UserID"]" class="btn btn-outline-danger">
+                                                <i class="ri-delete-bin-6-line"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

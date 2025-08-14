@@ -1,0 +1,144 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|d:\\study\\sem-4\\dot net\\lab5\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|d:\\study\\sem-4\\dot net\\lab5\\program6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|solutionrelative:program6.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|d:\\study\\sem-4\\dot net\\lab5\\program5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|solutionrelative:program5.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|d:\\study\\sem-4\\dot net\\lab5\\program3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|solutionrelative:program3.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|d:\\study\\sem-4\\dot net\\lab5\\program2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|solutionrelative:program2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|d:\\study\\sem-4\\dot net\\lab5\\program4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|solutionrelative:program4.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|d:\\study\\sem-4\\dot net\\lab5\\program1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B186028D-4364-445F-9CFA-9E2CF74DD8EC}|Lab5.csproj|solutionrelative:program1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 6,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Program1.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program1.cs",
+              "RelativeDocumentMoniker": "Program1.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program1.cs",
+              "RelativeToolTip": "Program1.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvykAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T04:28:50.272Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program2.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program2.cs",
+              "RelativeDocumentMoniker": "Program2.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program2.cs",
+              "RelativeToolTip": "Program2.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAADwvyIAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T04:54:51.852Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Program3.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program3.cs",
+              "RelativeDocumentMoniker": "Program3.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program3.cs",
+              "RelativeToolTip": "Program3.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAwwC0AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T04:57:56.807Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Program4.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program4.cs",
+              "RelativeDocumentMoniker": "Program4.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program4.cs",
+              "RelativeToolTip": "Program4.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAADwvyQAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T05:03:46.927Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Program5.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program5.cs",
+              "RelativeDocumentMoniker": "Program5.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program5.cs",
+              "RelativeToolTip": "Program5.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAxwBoAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T05:10:12.375Z",
+              "IsPinned": true,
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program6.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program6.cs",
+              "RelativeDocumentMoniker": "Program6.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program6.cs",
+              "RelativeToolTip": "Program6.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAAABQAAAAmAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T05:33:21.437Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\Dot Net\\Lab5\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABsAAAAXAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-16T04:28:20.579Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

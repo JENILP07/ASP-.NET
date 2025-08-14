@@ -1,0 +1,7 @@
+D:\Study\SEM-4\.Net\Extra1\bin\Debug\Extra1.exe.config
+D:\Study\SEM-4\.Net\Extra1\bin\Debug\Extra1.exe
+D:\Study\SEM-4\.Net\Extra1\bin\Debug\Extra1.pdb
+D:\Study\SEM-4\.Net\Extra1\obj\Debug\Extra1.csproj.AssemblyReference.cache
+D:\Study\SEM-4\.Net\Extra1\obj\Debug\Extra1.csproj.CoreCompileInputs.cache
+D:\Study\SEM-4\.Net\Extra1\obj\Debug\Extra1.exe
+D:\Study\SEM-4\.Net\Extra1\obj\Debug\Extra1.pdb

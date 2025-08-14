@@ -1,0 +1,1 @@
+﻿[assembly: System.Diagnostics.CodeAnalysis.SuppressMessage("Compiler", "CS0618", Justification = "Using SqlConnection intentionally")]

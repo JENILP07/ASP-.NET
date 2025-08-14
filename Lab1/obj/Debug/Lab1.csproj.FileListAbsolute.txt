@@ -1,0 +1,7 @@
+D:\Study\SEM-4\Dot Net\Lab1\bin\Debug\Lab1.exe.config
+D:\Study\SEM-4\Dot Net\Lab1\bin\Debug\Lab1.exe
+D:\Study\SEM-4\Dot Net\Lab1\bin\Debug\Lab1.pdb
+D:\Study\SEM-4\Dot Net\Lab1\obj\Debug\Lab1.csproj.AssemblyReference.cache
+D:\Study\SEM-4\Dot Net\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache
+D:\Study\SEM-4\Dot Net\Lab1\obj\Debug\Lab1.exe
+D:\Study\SEM-4\Dot Net\Lab1\obj\Debug\Lab1.pdb

@@ -1,0 +1,86 @@
+﻿@model User
+
+@{
+    ViewData["Title"] = "User Form";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>User Form</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="Home">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-action="index" asp-controller="User">User List</a></li>
+                <li class="breadcrumb-item active">User Form</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title"><i class="ri-user-add-fill"></i>Add User / Edit User</h1>
+
+                    <!-- User Form -->
+                    <form asp-action="UserAddEdit" asp-controller="User" method="post" class="row g-3">
+                        <input type="hidden" name="UserID" value="@Model.UserID" />
+                        <div class="col-md-6">
+                            <label for="UserName" class="form-label">Username<span class="text-danger">*</span></label>
+                            <input asp-for="UserName" class="form-control" id="UserName">
+                            <span asp-validation-for="UserName" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Password" class="form-label">Password<span class="text-danger">*</span></label>
+                            <input asp-for="Password" class="form-control" id="Password">
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Email" class="form-label">Email<span class="text-danger">*</span></label>
+                            <input asp-for="Email" class="form-control" id="Email" type="email">
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="Mobile" class="form-label">Mobile<span class="text-danger">*</span></label>
+                            <input asp-for="Mobile" class="form-control" id="Mobile" type="tel">
+                            <span asp-validation-for="Mobile" class="text-danger"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input asp-for="IsActive" class="form-check-input" type="checkbox" id="isActive" checked>
+                                <label class="form-check-label" for="isActive">
+                                    Active User
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-check">
+                                <input asp-for="IsAdmin" class="form-check-input" type="checkbox" id="isAdmin" />
+                                <label class="form-check-label" for="isAdmin">
+                                    Administrator
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                </div>
+                                <a asp-controller="User" asp-action="Index" class="btn btn-success align-self-end">
+                                    Go Back
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

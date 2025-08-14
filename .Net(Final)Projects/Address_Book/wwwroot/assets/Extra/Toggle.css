@@ -1,0 +1,59 @@
+﻿/* From Uiverse.io by catraco */ 
+/*------ Settings ------*/
+.container {
+  --color: #a5a5b0;
+  --size: 22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  cursor: pointer;
+  font-size: var(--size);
+  user-select: none;
+  fill: var(--color);
+  border: 1px solid;
+  width: 0px;
+}
+
+.container .chevron-right {
+  position: absolute;
+  animation: keyframes-return .5s backwards;
+}
+
+/* ------ On check event ------ */
+.container input:checked ~ .chevron-right {
+  animation: keyframes-rotate .5s backwards;
+  transform: rotate(180deg);
+}
+
+/* ------ Hide the default checkbox ------ */
+.container input {
+  position: absolute;
+  opacity: 100;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* ------ Animation ------ */
+@keyframes keyframes-rotate {
+  0% {
+    transform: rotate(0deg);
+    opacity: 100;
+  }
+
+  100% {
+    transform: rotate(180deg);
+  }
+}
+
+@keyframes keyframes-return {
+  0% {
+    transform: rotate(180deg);
+    opacity: 100;
+  }
+
+  100% {
+    transform: rotate(0deg);
+  }
+}

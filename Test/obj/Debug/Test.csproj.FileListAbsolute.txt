@@ -1,0 +1,7 @@
+D:\Study\SEM-4\Dot Net\Test\bin\Debug\Test.exe.config
+D:\Study\SEM-4\Dot Net\Test\bin\Debug\Test.exe
+D:\Study\SEM-4\Dot Net\Test\bin\Debug\Test.pdb
+D:\Study\SEM-4\Dot Net\Test\obj\Debug\Test.csproj.AssemblyReference.cache
+D:\Study\SEM-4\Dot Net\Test\obj\Debug\Test.csproj.CoreCompileInputs.cache
+D:\Study\SEM-4\Dot Net\Test\obj\Debug\Test.exe
+D:\Study\SEM-4\Dot Net\Test\obj\Debug\Test.pdb

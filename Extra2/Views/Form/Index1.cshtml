@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Employee</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Employee Details</h1>
+
+        <div class="card mt-4">
+            <div class="card-header">Details</div>
+            <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Employee ID</th>
+                            <th>Name</th>
+                            <th>Code</th>
+                            <th>Salary</th>
+                            <th>Designation</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td id="employeeId">-</td>
+                            <td id="employeeName">-</td>
+                            <td id="employeeCode">-</td>
+                            <td id="employeeSalary">-</td>
+                            <td id="employeeDesignation">-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <button class="btn btn-success" onclick="window.print()">Print</button>
+        </div>
+    </div>
+
+    <script>
+        // Retrieve form data from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+
+        document.getElementById('employeeId').textContent = urlParams.get('employeeId') || '-';
+        document.getElementById('employeeName').textContent = urlParams.get('employeeName') || '-';
+        document.getElementById('employeeCode').textContent = urlParams.get('employeeCode') || '-';
+        document.getElementById('employeeSalary').textContent = urlParams.get('employeeSalary') || '-';
+        document.getElementById('employeeDesignation').textContent = urlParams.get('employeeDesignation') || '-';
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

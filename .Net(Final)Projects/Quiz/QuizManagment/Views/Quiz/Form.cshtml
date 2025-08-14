@@ -1,0 +1,84 @@
+﻿@model Quiz
+@{
+    ViewData["Title"] = "Quiz Form";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Quiz Form</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Home">Dashboard</a></li>
+                <li class="breadcrumb-item"><a asp-action="Index" asp-controller="Quiz">Quiz List</a></li>
+                <li class="breadcrumb-item active">Quiz Form</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title"><i class="ri-questionnaire-fill"></i>Add/Edit Quiz</h1>
+
+                    <!-- Quiz Form -->
+                    <form asp-action="QuizAddEdit" asp-controller="Quiz" method="post" class="row g-3">
+
+                        <input type="hidden" asp-for="QuizID" />
+                        <!-- Quiz Name -->
+                        <div class="col-md-6">
+                            <label for="QuizName" class="form-label">Quiz Name<span class="text-danger">*</span></label>
+                            <input asp-for="QuizName" class="form-control" id="QuizName">
+                            <span asp-validation-for="QuizName" class="text-danger"></span>
+                        </div>
+
+                        <!-- Total Questions -->
+                        <div class="col-md-6">
+                            <label for="TotalQuestions" class="form-label">Total Questions<span class="text-danger">*</span></label>
+                            <input asp-for="TotalQuestions" class="form-control" id="TotalQuestions" type="number">
+                            <span asp-validation-for="TotalQuestions" class="text-danger"></span>
+                        </div>
+
+                        <!-- Quiz Date -->
+                        <div class="col-md-6">
+                            <label for="QuizDate" class="form-label">Quiz Date<span class="text-danger">*</span></label>
+                            <input asp-for="QuizDate" class="form-control" id="QuizDate" type="datetime-local">
+                            <span asp-validation-for="QuizDate" class="text-danger"></span>
+                        </div>
+
+                        <!-- User Name Drop Down -->
+                        <div class="col-md-6">
+                            <label for="UserID" class="form-label">User Name<span class="text-danger">*</span></label>
+                            <select asp-for="UserID" class="form-control" id="UserID">
+                                <option value="" selected disabled>Select User</option>
+                                @if (ViewBag.UserList != null)
+                                {
+                                    @foreach (var item in ViewBag.UserList)
+                                    {
+                                        <option value="@item.UserID" selected="@(item.UserID == Model.UserID ? "selected" : null)">
+                                            @item.UserName
+                                        </option>
+                                    }
+                                }
+                            </select>
+                            <span asp-validation-for="UserID" class="text-danger"></span>
+                        </div>
+
+                        <!-- Submit and Reset Buttons -->
+                        <div class="col-12">
+                            <div class="d-flex justify-content-between">
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                </div>
+                                <a asp-controller="Quiz" asp-action="Index" class="btn btn-success align-self-end">
+                                    Go Back
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

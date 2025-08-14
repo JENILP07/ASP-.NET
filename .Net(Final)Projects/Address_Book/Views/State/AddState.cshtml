@@ -1,0 +1,67 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Add State</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">State</li>
+                <li class="breadcrumb-item active">Add State</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    
+    @model StateModel
+
+    @using (Html.BeginForm("SaveState", "State", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+
+        <section class="section">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Create State <hr /></h5>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-1"></div>
+                            <label for="CountryID" class="col-sm-2 col-form-label"><span class="text-danger">*</span> Country ID</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.CountryID, new { @class = "form-control", type = "number", required = "required", placeholder = "Enter Country ID" })
+                                @Html.ValidationMessageFor(model => model.CountryID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-1"></div>
+                            <label for="StateName" class="col-sm-2 col-form-label"><span class="text-danger">*</span> State Name</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.StateName, new { @class = "form-control", required = "required", placeholder = "Enter State Name" })
+                                @Html.ValidationMessageFor(model => model.StateName, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-1"></div>
+                            <label for="StateCode" class="col-sm-2 col-form-label"><span class="text-danger">*</span> State Code</label>
+                            <div class="col-sm-6">
+                                @Html.TextBoxFor(model => model.StateCode, new { @class = "form-control", required = "required", placeholder = "Enter State Code" })
+                                @Html.ValidationMessageFor(model => model.StateCode, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        @Html.HiddenFor(model => model.CreationDate, new { Value = DateTime.Now })
+
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary me-3 mt-3">Submit</button>
+                            <button type="reset" class="btn btn-secondary me-3 mt-3">Reset</button>
+                            <a class="btn btn-danger mt-3" asp-controller="State" asp-action="StateList">Cancel</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    }
+
+
+</main><!-- End #main -->

@@ -1,0 +1,111 @@
+﻿@model QuizWiseQuestion
+
+@{
+    ViewData["Title"] = "Form QuizWiseQuestion";
+}
+
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1>Quiz Wise Form</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="Home">Dashboard</a>
+                </li>
+                <li class="breadcrumb-item">
+                    <a asp-action="Index" asp-controller="QuizWise">Quiz Wise List</a>
+                </li>
+                <li class="breadcrumb-item active">Quiz Wise Form</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    @TempData["ErrorMessage"]
+    <section class="section">
+        <div class="row">
+            <div class="card">
+                <div class="card-body">
+                    <h1 class="card-title">
+                        <i class="ri-questionnaire-fill"></i> Add Quiz Wise
+                    </h1>
+
+                    <form asp-action="QuizWiseQuestionAddEdit" asp-controller="QuizWise" method="post" class="form">
+                        <input type="hidden" asp-for="QuizWiseQuestionsID" />
+
+                        <div class="row mb-3">
+                            <!-- Quiz ID Select -->
+                            <div class="col-md-6">
+                                <label for="QuizID" class="form-label">
+                                    Quiz ID <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" asp-for="QuizID" required>
+                                    <option value="" disabled selected>Select Quiz ID</option>
+                                    @if (ViewBag.QuizList != null)
+                                    {
+                                        @foreach (var item in ViewBag.QuizList)
+                                        {
+                                            <option value="@item.QuizID" selected="@(item.QuizID == Model?.QuizID)">
+                                                @item.QuizName
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+
+                            <!-- Question ID Select -->
+                            <div class="col-md-6">
+                                <label for="QuestionID" class="form-label">
+                                    Question ID <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" asp-for="QuestionID" required>
+                                    <option value="" disabled selected>Select Question ID</option>
+                                    @if (ViewBag.QuestionList != null)
+                                    {
+                                        @foreach (var item in ViewBag.QuestionList)
+                                        {
+                                            <option value="@item.QuestionID" selected="@(item.QuestionID == Model?.QuestionID)">
+                                                @item.QuestionID
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <!-- User Select -->
+                            <div class="col-md-6">
+                                <label for="UserID" class="form-label">
+                                    User <span class="text-danger">*</span>
+                                </label>
+                                <select class="form-select" asp-for="UserID" required>
+                                    <option value="" disabled selected>Select User</option>
+                                    @if (ViewBag.UserList != null)
+                                    {
+                                        @foreach (var item in ViewBag.UserList)
+                                        {
+                                            <option value="@item.UserID" selected="@(item.UserID == Model?.UserID)">
+                                                @item.UserName
+                                            </option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-12 d-flex justify-content-between">
+                                <div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="reset" class="btn btn-secondary">Reset</button>
+                                </div>
+                                <a asp-action="Index" asp-controller="QuizWise" class="btn btn-success">
+                                    Go Back
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

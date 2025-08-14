@@ -1,0 +1,183 @@
+﻿@model DataTable
+@using System.Data
+@{
+    ViewData["Title"] = "Dashboard";
+}
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Quiz Managment @ViewData["Title"]</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a>@ViewData["Title"]</a></li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="row">
+
+            <!-- Left side columns -->
+            <div class="col-lg-12">
+                <div class="row">
+
+                    <!-- Sales Card -->
+                    <div class="col-xxl-4 col-md-4 col-sm-4">
+                        <div class="card info-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Total Quizes</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>10</h6>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Sales Card -->
+                    <!-- Customers Card -->
+                    <div class="col-xxl-4 col-xl-12 col-sm-4 col-md-4">
+
+                        <div class="card info-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Total Questions</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <i class="bi bi-cart"></i>
+                                    <div class="ps-3">
+                                        <h6>47</h6>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div><!-- End Customers Card -->
+                    <!-- Revenue Card -->
+                    <div class="col-xxl-4 col-md-4 col-sm-4">
+                        <div class="card info-card">
+
+                            <div class="card-body">
+                                <h5 class="card-title">Total Question Levels</h5>
+
+                                <div class="d-flex align-items-center">
+                                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                        <i class="bi bi-cart"></i>
+                                    </div>
+                                    <div class="ps-3">
+                                        <h6>5</h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div><!-- End Revenue Card -->
+                    <div class="row">
+                        <div class="col-md-6 col-sm-4">
+                            <div class="card">
+                                <div class="table-responsive">
+                                    <table class="table datatable">
+                                        <thead>
+                                            <tr>
+                                                <th>Quiz ID</th>
+                                                <th>Total Questions</th>
+                                                <th>Quiz Name</th>
+                                                <th>User Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach (DataRow dataRow in Model.Rows)
+                                            {
+                                                <tr>
+                                                    <td>@dataRow["QuizID"]</td>
+                                                    <td>@dataRow["TotalQuestions"]</td>
+                                                    <td>@dataRow["QuizName"]</td>
+                                                    <td>@dataRow["UserName"]</td>
+                                                </tr>
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-4">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">Types Of Question Levels</h5>
+                                    <!-- Donut Chart -->
+                                    <div id="donutChart" style="min-height: 300px;" class="echart"></div>
+
+                                    <script>
+                                        document.addEventListener("DOMContentLoaded", () => {
+                                          echarts.init(document.querySelector("#donutChart")).setOption({
+                                            tooltip: {
+                                              trigger: 'item'
+                                            },
+                                            legend: {
+                                              top: '5%',
+                                              left: 'center'
+                                            },
+                                            series: [{
+                                              name: 'Difficulty',
+                                              type: 'pie',
+                                              radius: ['40%', '70%'],
+                                              avoidLabelOverlap: false,
+                                              label: {
+                                                show: false,
+                                                position: 'center'
+                                              },
+                                              emphasis: {
+                                                label: {
+                                                  show: true,
+                                                  fontSize: '18',
+                                                  fontWeight: 'bold'
+                                                }
+                                              },
+                                              labelLine: {
+                                                show: false
+                                              },
+                                              data: [{
+                                                  value: 10,
+                                                  name: 'Easy'
+                                                },
+                                                {
+                                                  value: 5,
+                                                  name: 'Beginner'
+                                                },
+                                                {
+                                                  value: 4,
+                                                  name: 'Medium'
+                                                },
+                                                {
+                                                  value: 7,
+                                                  name: 'Hard'
+                                                },
+                                                {
+                                                  value: 2,
+                                                  name: 'Extra Hard'
+                                                }
+                                              ]
+                                            }]
+                                          });
+                                        });
+                                    </script>
+                                    <!-- End Donut Chart -->
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

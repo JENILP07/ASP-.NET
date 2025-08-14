@@ -1,0 +1,121 @@
+﻿<aside id="sidebar" class="sidebar">
+    <ul class="sidebar-nav" id="sidebar-nav">
+        <!-- Dashboard Section -->
+        <li class="nav-heading">Dashboard</li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" asp-action="Index" asp-controller="Home">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+        </li>
+
+        <!-- User Management Section -->
+        <li class="nav-heading">User Management</li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#user-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-person"></i>
+                <span>User</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="user-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a asp-action="Index" asp-controller="User"><i class="bi bi-circle"></i> <span>User List</span></a></li>
+                <li><a asp-action="Form" asp-controller="User"><i class="bi bi-circle"></i> <span>User Form</span></a></li>
+            </ul>
+        </li>
+
+        <!-- Question Management Section -->
+        <li class="nav-heading">Question Management</li>
+
+        <!-- Question Level -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#question-level-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-layout-text-window-reverse"></i>
+                <span>Question Level</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="question-level-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a asp-action="Index" asp-controller="QuestionLevel"><i class="bi bi-circle"></i> <span>Question Level List</span></a></li>
+                <li><a asp-action="Form" asp-controller="QuestionLevel"><i class="bi bi-circle"></i> <span>Question Level Form</span></a></li>
+            </ul>
+        </li>
+
+        <!-- Quiz Management -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#quiz-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-menu-button-wide"></i>
+                <span>Quiz</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="quiz-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a asp-action="Index" asp-controller="Quiz"><i class="bi bi-circle"></i> <span>Quiz List</span></a></li>
+                <li><a asp-action="Form" asp-controller="Quiz"><i class="bi bi-circle"></i> <span>Quiz Form</span></a></li>
+            </ul>
+        </li>
+
+        <!-- Questions -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#question-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-journal-text"></i>
+                <span>Question</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="question-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a asp-action="Index" asp-controller="Question"><i class="bi bi-circle"></i> <span>Question List</span></a></li>
+                <li><a asp-action="Form" asp-controller="Question"><i class="bi bi-circle"></i> <span>Question Form</span></a></li>
+            </ul>
+        </li>
+
+
+        <!-- Quiz Wise Question Management -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" data-bs-target="#quiz-wise-nav" data-bs-toggle="collapse" href="#">
+                <i class="bi bi-bar-chart"></i>
+                <span>Quiz Wise Question</span>
+                <i class="bi bi-chevron-down ms-auto"></i>
+            </a>
+            <ul id="quiz-wise-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <li><a asp-action="Index" asp-controller="QuizWise"><i class="bi bi-circle"></i> <span>Quiz Wise Question List</span></a></li>
+                <li><a asp-action="Form" asp-controller="QuizWise"><i class="bi bi-circle"></i> <span>Quiz Wise Question Form</span></a></li>
+            </ul>
+        </li>
+
+        <!-- Quiz Attempt Section -->
+        <li class="nav-heading">Quiz Attempt</li>
+        <li class="nav-item">
+            <a class="nav-link collapsed" asp-action="Index" asp-controller="QuizRendering">
+                <i class="ri-code-s-slash-line"></i>
+                <span>Quiz Attempt</span>
+            </a>
+        </li>
+    </ul>
+</aside>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const currentPath = window.location.pathname;
+        const sidebarLinks = document.querySelectorAll('#sidebar a');
+
+        sidebarLinks.forEach(function (link) {
+            if (link.getAttribute('href') === "#") return;
+
+            if (link.pathname === currentPath) {
+                link.classList.add('active');
+
+                const collapseContainer = link.closest('.nav-content');
+                if (collapseContainer) {
+                    collapseContainer.classList.add('show');
+
+                    const parentToggle = collapseContainer.parentElement.querySelector('[data-bs-toggle="collapse"]');
+                    if (parentToggle) {
+                        parentToggle.setAttribute('aria-expanded', 'true');
+                    }
+                }
+            }
+
+            link.addEventListener('click', function () {
+                sidebarLinks.forEach(l => l.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
+    });
+</script>

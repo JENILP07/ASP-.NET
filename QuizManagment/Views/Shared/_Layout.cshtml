@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"]</title>
+
+    <!-- Favicons -->
+    <link href="~/assets/img/favicon.png" rel="icon">
+    <link href="~/assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.gstatic.com" rel="preconnect">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Nunito:300,300i,400,400i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="~/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="~/assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    <link href="~/assets/vendor/quill/quill.snow.css" rel="stylesheet">
+    <link href="~/assets/vendor/quill/quill.bubble.css" rel="stylesheet">
+    <link href="~/assets/vendor/remixicon/remixicon.css" rel="stylesheet">
+    <link href="~/assets/vendor/simple-datatables/style.css" rel="stylesheet">
+
+    <!-- Template Main CSS File -->
+    <link href="~/assets/css/style.css" rel="stylesheet">
+
+    <!-- Template Main JS File -->
+    <script src="~/assets/js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+    <!-- SweetAlert2 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.26/dist/sweetalert2.min.css" rel="stylesheet">
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.26/dist/sweetalert2.min.js"></script>
+
+</head>
+<body>
+    <!-- ======= Header ======= -->
+    <partial name="_Header" />
+    <!-- End Header -->
+    <!-- ======= Sidebar ======= -->
+    <partial name="_Sidebar" />
+    <!-- End Sidebar -->
+    <!-- Main Content -->
+
+        <div>
+            @RenderBody()
+        </div>
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="btn btn-success btn-lg" style="display: none;">
+        <i class="ri-arrow-up-line"></i> <!-- Using Bootstrap Icons -->
+    </button>
+
+
+    <!-- ======= Footer ======= -->
+    <partial name="_Footer" />
+    <!-- End Footer -->
+    <!-- Vendor JS Files -->
+    <script src="~/assets/vendor/apexcharts/apexcharts.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/chart.js/chart.umd.js"></script>
+    <script src="~/assets/vendor/echarts/echarts.min.js"></script>
+    <script src="~/assets/vendor/quill/quill.js"></script>
+    <script src="~/assets/vendor/simple-datatables/simple-datatables.js"></script>
+    <script src="~/assets/vendor/tinymce/tinymce.min.js"></script>
+    <script src="~/assets/vendor/php-email-form/validate.js"></script>
+
+    <!-- Template Main JS File -->
+    <script src="~/assets/js/main.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+
+    <style>
+
+        /*------------------------------------------------------------------
+         #Back to top
+        ------------------------------------------------------------------*/
+        #backToTop {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 5;
+            width: 50px; /* Set width */
+            height: 50px; /* Set height */
+            border-radius: 50%; /* Ensures the button is circular */
+            display: none;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0;
+        }
+
+        /*------------------------------------------------------------------
+         #Coustom Scroll Bar
+        ------------------------------------------------------------------*/
+        *::-webkit-scrollbar {
+            width: 20px;
+        }
+
+        *::-webkit-scrollbar-track {
+            border-radius: 8px;
+        }
+
+        *::-webkit-scrollbar-thumb {
+            height: 56px;
+            border: 4px solid transparent;
+            background-clip: content-box;
+            background-color: #AAAAAB;
+        }
+
+            *::-webkit-scrollbar-thumb:hover {
+                background-color: #5555;
+            }
+    </style>
+    <script>
+
+        // Show or hide the Back to Top button based on scroll position
+        window.onscroll = function () {
+            var backToTopButton = document.getElementById("backToTop");
+
+            // If page is scrolled more than 130px, show the button
+            if (document.body.scrollTop > 110 || document.documentElement.scrollTop > 110) {
+                backToTopButton.style.display = "block";
+            } else {
+                backToTopButton.style.display = "none";
+            }
+        };
+
+        // Scroll to top functionality
+        document.getElementById("backToTop").addEventListener("click", function () {
+            window.scrollTo({ top:0, behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

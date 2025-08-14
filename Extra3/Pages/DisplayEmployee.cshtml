@@ -1,0 +1,39 @@
+﻿@page
+@model DisplayEmployeeModel
+@{
+    ViewData["Title"] = "Display Employee";
+}
+
+<div class="container mt-5">
+    <h1 class="text-center">Employee Details</h1>
+
+    <div class="card mt-4">
+        <div class="card-header">Details</div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Code</th>
+                        <th>Salary</th>
+                        <th>Designation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>@Model.EmployeeId</td>
+                        <td>@Model.EmployeeName</td>
+                        <td>@Model.EmployeeCode</td>
+                        <td>@Model.EmployeeSalary</td>
+                        <td>@Model.EmployeeDesignation</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        <button class="btn btn-success" onclick="window.print()">Print</button>
+    </div>
+</div>

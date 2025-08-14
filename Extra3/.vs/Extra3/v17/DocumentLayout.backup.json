@@ -1,0 +1,88 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "D:\\Study\\SEM-4\\.Net\\Extra3\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|d:\\study\\sem-4\\.net\\extra3\\pages\\addemployeemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|solutionrelative:pages\\addemployeemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|d:\\study\\sem-4\\.net\\extra3\\pages\\displayemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|solutionrelative:pages\\displayemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|d:\\study\\sem-4\\.net\\extra3\\pages\\addemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|solutionrelative:pages\\addemployee.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|d:\\study\\sem-4\\.net\\extra3\\pages\\displayemployeemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{62F5D885-B8CD-4006-A17A-2E4627ECAA26}|Extra3.csproj|solutionrelative:pages\\displayemployeemodel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DisplayEmployeeModel.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\DisplayEmployeeModel.cs",
+              "RelativeDocumentMoniker": "Pages\\DisplayEmployeeModel.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\DisplayEmployeeModel.cs",
+              "RelativeToolTip": "Pages\\DisplayEmployeeModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-31T05:56:12.733Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AddEmployeeModel.cs",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\AddEmployeeModel.cs",
+              "RelativeDocumentMoniker": "Pages\\AddEmployeeModel.cs",
+              "ToolTip": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\AddEmployeeModel.cs",
+              "RelativeToolTip": "Pages\\AddEmployeeModel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-31T05:55:48.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "DisplayEmployee.cshtml",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\DisplayEmployee.cshtml",
+              "RelativeDocumentMoniker": "Pages\\DisplayEmployee.cshtml",
+              "ToolTip": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\DisplayEmployee.cshtml",
+              "RelativeToolTip": "Pages\\DisplayEmployee.cshtml",
+              "ViewState": "AgIAAA8AAAAAAAAAAAAAACcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-31T05:54:58.71Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AddEmployee.cshtml",
+              "DocumentMoniker": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\AddEmployee.cshtml",
+              "RelativeDocumentMoniker": "Pages\\AddEmployee.cshtml",
+              "ToolTip": "D:\\Study\\SEM-4\\.Net\\Extra3\\Pages\\AddEmployee.cshtml",
+              "RelativeToolTip": "Pages\\AddEmployee.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACYAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2024-12-31T05:54:19.603Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

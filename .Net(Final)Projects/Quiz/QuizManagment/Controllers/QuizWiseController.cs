@@ -1,274 +1,153 @@
-﻿using System.Data;
-using System.Data.SqlClient;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using QuizManagment.Models;
+using System.Data;
 
 namespace QuizManagment.Controllers
 {
+    [Authorize]
     public class QuizWiseController : Controller
     {
         private readonly IConfiguration _configuration;
+        public QuizWiseController(IConfiguration configuration) { _configuration = configuration; }
 
-        public QuizWiseController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
+        private string GetConnectionString() =>
+            _configuration.GetConnectionString("ConnectionString")
+            ?? throw new InvalidOperationException("Connection string not found.");
 
         public IActionResult Index()
         {
             DataTable table = new DataTable();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
-
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (SqlCommand command = new SqlCommand("PR_QuizWiseQuestions_SelectAll", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        using (SqlDataReader reader = command.ExecuteReader())
-                        {
-                            table.Load(reader);
-                        }
-                    }
-                }
+                using var conn = new SqlConnection(GetConnectionString());
+                conn.Open();
+                using var cmd = new SqlCommand("PR_QuizWiseQuestions_SelectAll", conn) { CommandType = CommandType.StoredProcedure };
+                using var reader = cmd.ExecuteReader();
+                table.Load(reader);
             }
             catch (Exception ex)
             {
-                ViewBag.ErrorMessage = "Error loading question levels: " + ex.Message;
+                ViewBag.ErrorMessage = "Error loading quiz wise questions: " + ex.Message;
                 return View(new DataTable());
             }
-
             return View(table.Rows.Count > 0 ? table : new DataTable());
         }
+
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult QuizWiseQuestionAddEdit(QuizWiseQuestion model)
         {
-            if (model == null)
-            {
-                return BadRequest("Invalid data received.");
-            }
-
-            if (!ModelState.IsValid)
-            {
-                return View("Form", model);
-            }
-
+            if (model == null) return BadRequest("Invalid data received.");
+            if (!ModelState.IsValid) { PopulateDropdowns(); return View("Form", model); }
             try
             {
-                string connectionString = _configuration.GetConnectionString("ConnectionString");
-                if (string.IsNullOrEmpty(connectionString))
+                using var conn = new SqlConnection(GetConnectionString());
+                conn.Open();
+                using var cmd = conn.CreateCommand();
+                cmd.CommandType = CommandType.StoredProcedure;
+                if (model.QuizWiseQuestionsID == 0)
+                    cmd.CommandText = "PR_QuizWiseQuestions_Insert";
+                else
                 {
-                    throw new Exception("Database connection string is missing.");
+                    cmd.CommandText = "PR_QuizWiseQuestions_UpdateByPK";
+                    cmd.Parameters.Add("@QuizWiseQuestionsID", SqlDbType.Int).Value = model.QuizWiseQuestionsID;
                 }
-
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (SqlCommand command = connection.CreateCommand())
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        if (model.QuizWiseQuestionsID == 0)
-                        {
-                            command.CommandText = "PR_QuizWiseQuestions_Insert";
-                        }
-                        else
-                        {
-                            command.CommandText = "PR_QuizWiseQuestions_UpdateByPK";
-                            command.Parameters.Add("@QuizWiseQuestionsID", SqlDbType.Int).Value = model.QuizWiseQuestionsID;
-                        }
-
-                        command.Parameters.Add("@QuizID", SqlDbType.Int).Value = model.QuizID;
-                        command.Parameters.Add("@QuestionID", SqlDbType.Int).Value = model.QuestionID;
-                        command.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
-
-                        command.ExecuteNonQuery();
-                    }
-                }
-
+                cmd.Parameters.Add("@QuizID", SqlDbType.Int).Value = model.QuizID;
+                cmd.Parameters.Add("@QuestionID", SqlDbType.Int).Value = model.QuestionID;
+                cmd.Parameters.Add("@UserID", SqlDbType.Int).Value = model.UserID;
+                cmd.ExecuteNonQuery();
+                TempData["SuccessMessage"] = "Quiz wise question saved successfully!";
                 return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                ModelState.AddModelError(string.Empty, "An error occurred while saving data: " + ex.Message);
+                ModelState.AddModelError(string.Empty, "An error occurred: " + ex.Message);
+                PopulateDropdowns();
                 return View("Form", model);
             }
         }
 
-        #region AddForm
-        // Display the form for adding or editing a quiz
         public IActionResult Form(int? QuizWiseQuestionsID)
         {
-            PopulateDropdowns(); // Ensure dropdowns are set
-
-            var model = new QuizWiseQuestion(); // Always initialize the model
-
+            PopulateDropdowns();
+            var model = new QuizWiseQuestion();
             if (QuizWiseQuestionsID != null)
             {
-                string connectionString = _configuration.GetConnectionString("ConnectionString");
-
                 try
                 {
-                    using (var connection = new SqlConnection(connectionString))
-                    using (var command = new SqlCommand("PR_QuizWiseQuestions_SelectByPK", connection))
+                    using var conn = new SqlConnection(GetConnectionString());
+                    using var cmd = new SqlCommand("PR_QuizWiseQuestions_SelectByPK", conn) { CommandType = CommandType.StoredProcedure };
+                    conn.Open();
+                    cmd.Parameters.AddWithValue("@QuizWiseQuestionsID", QuizWiseQuestionsID);
+                    using var reader = cmd.ExecuteReader();
+                    var table = new DataTable(); table.Load(reader);
+                    if (table.Rows.Count > 0)
                     {
-                        connection.Open();
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@QuizWiseQuestionsID", QuizWiseQuestionsID);
-
-                        using (var reader = command.ExecuteReader())
-                        {
-                            var table = new DataTable();
-                            table.Load(reader);
-
-                            if (table.Rows.Count > 0) // Ensure we have data
-                            {
-                                var dataRow = table.Rows[0];
-                                model.QuizWiseQuestionsID = Convert.ToInt32(dataRow["QuizWiseQuestionsID"]);
-                                model.QuizID = Convert.ToInt32(dataRow["QuizID"]);
-                                model.QuestionID = Convert.ToInt32(dataRow["QuestionID"]);
-                                model.UserID = Convert.ToInt32(dataRow["UserID"]);
-                            }
-                            else
-                            {
-                                TempData["ErrorMessage"] = "No data found for the given QuizWiseQuestionsID.";
-                            }
-                        }
+                        var dr = table.Rows[0];
+                        model.QuizWiseQuestionsID = Convert.ToInt32(dr["QuizWiseQuestionsID"]);
+                        model.QuizID = Convert.ToInt32(dr["QuizID"]);
+                        model.QuestionID = Convert.ToInt32(dr["QuestionID"]);
+                        model.UserID = Convert.ToInt32(dr["UserID"]);
                     }
+                    else TempData["ErrorMessage"] = "No data found.";
                 }
-                catch (Exception ex)
-                {
-                    TempData["ErrorMessage"] = "Error loading quiz details: " + ex.Message;
-                }
+                catch (Exception ex) { TempData["ErrorMessage"] = "Error: " + ex.Message; }
             }
-
-            return View("Form", model); // Ensure model is always returned
+            return View("Form", model);
         }
 
-
-        #endregion
-
-
+        [HttpPost, ValidateAntiForgeryToken]
         public IActionResult Delete(int QuizWiseQuestionsID)
         {
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
-
             try
             {
-                using (SqlConnection connection = new SqlConnection(connectionString))
-                {
-                    connection.Open();
-                    using (SqlCommand command = new SqlCommand("PR_QuizWiseQuestions_DeleteByPK", connection))
-                    {
-                        command.CommandType = CommandType.StoredProcedure;
-                        command.Parameters.AddWithValue("@QuizWiseQuestionsID", QuizWiseQuestionsID);
-                        command.ExecuteNonQuery();
-                    }
-                }
+                using var conn = new SqlConnection(GetConnectionString());
+                conn.Open();
+                using var cmd = new SqlCommand("PR_QuizWiseQuestions_DeleteByPK", conn) { CommandType = CommandType.StoredProcedure };
+                cmd.Parameters.AddWithValue("@QuizWiseQuestionsID", QuizWiseQuestionsID);
+                cmd.ExecuteNonQuery();
+                TempData["SuccessMessage"] = "Record deleted successfully!";
             }
-            catch (Exception ex)
-            {
-                TempData["ErrorMessage"] = "Error deleting user: " + ex.Message;
-            }
-
+            catch (Exception ex) { TempData["ErrorMessage"] = "Error deleting: " + ex.Message; }
             return RedirectToAction("Index");
         }
 
-   /*     public IActionResult AddForm()
-        {
-            UserDropDown();
-            QuestionDropDown();
-            QuizDropDown();
-            return View("Form");
-        }
-
-        public IActionResult EditForm()
-        {
-            UserDropDown();
-            QuestionLevelDropDown();
-            return View("Form");
-        }*/
-
-
         #region Dropdowns
-        private void PopulateDropdowns()
-        {
-            QuizDropDown();
-            QuestionLevelDropDown();
-            UserDropDown();
-        }
+        private void PopulateDropdowns() { QuizDropDown(); QuestionLevelDropDown(); UserDropDown(); }
 
         private void QuizDropDown()
         {
             ViewBag.QuizList = new List<QuizDropDown>();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlCommand command = new SqlCommand("PR_QUIZ_DROPDOWN", connection))
-            {
-                connection.Open();
-                command.CommandType = CommandType.StoredProcedure;
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-                    ViewBag.QuizList = dt.AsEnumerable().Select(row => new QuizDropDown
-                    {
-                        QuizID = row.Field<int>("QuizID"),
-                        QuizName = row.Field<string>("QuizName")
-                    }).ToList();
-                }
-            }
+            using var conn = new SqlConnection(GetConnectionString());
+            using var cmd = new SqlCommand("PR_QUIZ_DROPDOWN", conn) { CommandType = CommandType.StoredProcedure };
+            conn.Open();
+            using var reader = cmd.ExecuteReader();
+            var dt = new DataTable(); dt.Load(reader);
+            ViewBag.QuizList = dt.AsEnumerable().Select(r => new QuizDropDown { QuizID = r.Field<int>("QuizID"), QuizName = r.Field<string>("QuizName") ?? "" }).ToList();
         }
 
         private void QuestionLevelDropDown()
         {
             ViewBag.QuestionLevelList = new List<QuestionLevelDropDown>();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlCommand command = new SqlCommand("PR_QUESTIONLEVEL_DROPDOWN", connection))
-            {
-                connection.Open();
-                command.CommandType = CommandType.StoredProcedure;
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-                    ViewBag.QuestionLevelList = dt.AsEnumerable().Select(row => new QuestionLevelDropDown
-                    {
-                        QuestionLevelID = row.Field<int>("QuestionLevelID"),
-                        LevelName = row.Field<string>("QuestionLevel")
-                    }).ToList();
-                }
-            }
+            using var conn = new SqlConnection(GetConnectionString());
+            using var cmd = new SqlCommand("PR_QUESTIONLEVEL_DROPDOWN", conn) { CommandType = CommandType.StoredProcedure };
+            conn.Open();
+            using var reader = cmd.ExecuteReader();
+            var dt = new DataTable(); dt.Load(reader);
+            ViewBag.QuestionLevelList = dt.AsEnumerable().Select(r => new QuestionLevelDropDown { QuestionLevelID = r.Field<int>("QuestionLevelID"), LevelName = r.Field<string>("QuestionLevel") ?? "" }).ToList();
         }
 
         private void UserDropDown()
         {
             ViewBag.UserList = new List<UserDropDown>();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            using (SqlCommand command = new SqlCommand("PR_USER_DROPDOWN", connection))
-            {
-                connection.Open();
-                command.CommandType = CommandType.StoredProcedure;
-                using (SqlDataReader reader = command.ExecuteReader())
-                {
-                    DataTable dt = new DataTable();
-                    dt.Load(reader);
-                    ViewBag.UserList = dt.AsEnumerable().Select(row => new UserDropDown
-                    {
-                        UserID = row.Field<int>("UserID"),
-                        UserName = row.Field<string>("UserName")
-                    }).ToList();
-                }
-            }
+            using var conn = new SqlConnection(GetConnectionString());
+            using var cmd = new SqlCommand("PR_USER_DROPDOWN", conn) { CommandType = CommandType.StoredProcedure };
+            conn.Open();
+            using var reader = cmd.ExecuteReader();
+            var dt = new DataTable(); dt.Load(reader);
+            ViewBag.UserList = dt.AsEnumerable().Select(r => new UserDropDown { UserID = r.Field<int>("UserID"), UserName = r.Field<string>("UserName") ?? "" }).ToList();
         }
         #endregion
-
     }
 }
-

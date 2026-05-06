@@ -1,4 +1,4 @@
-﻿@model DataTable
+@model DataTable
 @using System.Data
 @{
     ViewData["Title"] = "Question Level List";
@@ -110,14 +110,14 @@
                                                         Edit
                                                     </a>
 
-                                                    <!-- Delete Button -->
-                                                    <a asp-controller="QuestionLevel" asp-action="Delete"
-                                                       asp-route-QuestionLevelID="@dataRow["QuestionLevelID"]"
-                                                       class="btn btn-outline-danger btn-sm"
-                                                       onclick="return confirm('Are you sure you want to delete this question level?');">
-                                                        <i class="bi bi-x"></i>
-                                                        Delete
-                                                    </a>
+                                                    <!-- Delete Button (POST with CSRF) -->
+                                                    <form asp-controller="QuestionLevel" asp-action="Delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this question level?');">
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="QuestionLevelID" value="@dataRow["QuestionLevelID"]" />
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                            <i class="bi bi-x"></i> Delete
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>

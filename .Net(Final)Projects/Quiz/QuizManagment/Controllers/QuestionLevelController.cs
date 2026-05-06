@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OfficeOpenXml;
 using QuizManagment.Models;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 
 namespace QuizManagment.Controllers
 {
+    [Authorize]
     public class QuestionLevelController : Controller
     {
         #region Configuration

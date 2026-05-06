@@ -1,4 +1,4 @@
-﻿@model DataTable
+@model DataTable
 @using System.Data
 @{
     ViewData["Title"] = "Quiz Wise List";
@@ -91,14 +91,14 @@
                                                         Edit
                                                     </a>
 
-                                                    <!-- Delete Button -->
-                                                    <a asp-controller="QuizWise" asp-action="Delete"
-                                                       asp-route-QuizWiseQuestionsID="@dataRow["QuizWiseQuestionsID"]"
-                                                       class="btn btn-outline-danger btn-sm"
-                                                       onclick="return confirm('Are you sure you want to delete this user?');">
-                                                        <i class="bi bi-x"></i>
-                                                        Delete
-                                                    </a>
+                                                    <!-- Delete Button (POST with CSRF) -->
+                                                    <form asp-controller="QuizWise" asp-action="Delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this record?');">
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="QuizWiseQuestionsID" value="@dataRow["QuizWiseQuestionsID"]" />
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                            <i class="bi bi-x"></i> Delete
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>

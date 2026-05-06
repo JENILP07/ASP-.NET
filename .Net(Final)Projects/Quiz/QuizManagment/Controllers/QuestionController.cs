@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QuizManagment.Models;
 using System.Data;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 
 namespace QuizManagment.Controllers
 {
+    [Authorize]
     public class QuestionController : Controller
     {
         #region Configuration
@@ -20,7 +22,8 @@ namespace QuizManagment.Controllers
         public IActionResult Index()
         {
             DataTable table = new DataTable();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
+            string connectionString = _configuration.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.");
 
             try
             {
@@ -48,9 +51,12 @@ namespace QuizManagment.Controllers
         #endregion
 
         #region Delete
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult Delete(int QuestionID)
         {
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
+            string connectionString = _configuration.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.");
 
             try
             {
@@ -85,7 +91,8 @@ namespace QuizManagment.Controllers
                 return View(new Question { Created = DateTime.Now, Modified = DateTime.Now, IsActive = true });
             }
 
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
+            string connectionString = _configuration.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.");
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -104,14 +111,13 @@ namespace QuizManagment.Controllers
                             var model = new Question
                             {
                                 QuestionID = row.Field<int>("QuestionID"),
-                              
-                                QuestionText = row.Field<string>("QuestionText"),
+                                QuestionText = row.Field<string>("QuestionText") ?? "",
                                 QuestionLevelID = row.Field<int>("QuestionLevelID"),
-                                OptionA = row.Field<string>("OptionA"),
-                                OptionB = row.Field<string>("OptionB"),
-                                OptionC = row.Field<string>("OptionC"),
-                                OptionD = row.Field<string>("OptionD"),
-                                CorrectOption = row.Field<string>("CorrectOption"),
+                                OptionA = row.Field<string>("OptionA") ?? "",
+                                OptionB = row.Field<string>("OptionB") ?? "",
+                                OptionC = row.Field<string>("OptionC") ?? "",
+                                OptionD = row.Field<string>("OptionD") ?? "",
+                                CorrectOption = row.Field<string>("CorrectOption") ?? "",
                                 QuestionMarks = row.Field<int>("QuestionMarks"),
                                 UserID = row.Field<int>("UserID"),
                                 IsActive = row.Field<bool>("IsActive"),
@@ -135,6 +141,7 @@ namespace QuizManagment.Controllers
 
         #region AddEditQuestion
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult AddEditQuestion(Question model)
         {
             if (!ModelState.IsValid)
@@ -143,7 +150,8 @@ namespace QuizManagment.Controllers
                 return View("Form", model);
             }
 
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
+            string connectionString = _configuration.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.");
             try
             {
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -170,8 +178,8 @@ namespace QuizManagment.Controllers
                     command.Parameters.AddWithValue("@QuestionLevelID", model.QuestionLevelID);
                     command.Parameters.AddWithValue("@OptionA", model.OptionA);
                     command.Parameters.AddWithValue("@OptionB", model.OptionB);
-                    command.Parameters.AddWithValue("@OptionC", model.OptionC ?? (object)DBNull.Value); // Handle NULL
-                    command.Parameters.AddWithValue("@OptionD", model.OptionD ?? (object)DBNull.Value); // Handle NULL
+                    command.Parameters.AddWithValue("@OptionC", model.OptionC ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@OptionD", model.OptionD ?? (object)DBNull.Value);
                     command.Parameters.AddWithValue("@CorrectOption", model.CorrectOption);
                     command.Parameters.AddWithValue("@QuestionMarks", model.QuestionMarks);
                     command.Parameters.AddWithValue("@UserID", model.UserID);
@@ -201,7 +209,8 @@ namespace QuizManagment.Controllers
         private void QuizDropDown()
         {
             ViewBag.QuizList = new List<QuizDropDown>();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
+            string connectionString = _configuration.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand("PR_QUIZ_DROPDOWN", connection))
@@ -215,7 +224,7 @@ namespace QuizManagment.Controllers
                     ViewBag.QuizList = dt.AsEnumerable().Select(row => new QuizDropDown
                     {
                         QuizID = row.Field<int>("QuizID"),
-                        QuizName = row.Field<string>("QuizName")
+                        QuizName = row.Field<string>("QuizName") ?? ""
                     }).ToList();
                 }
             }
@@ -224,7 +233,8 @@ namespace QuizManagment.Controllers
         private void QuestionLevelDropDown()
         {
             ViewBag.QuestionLevelList = new List<QuestionLevelDropDown>();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
+            string connectionString = _configuration.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand("PR_QUESTIONLEVEL_DROPDOWN", connection))
@@ -238,7 +248,7 @@ namespace QuizManagment.Controllers
                     ViewBag.QuestionLevelList = dt.AsEnumerable().Select(row => new QuestionLevelDropDown
                     {
                         QuestionLevelID = row.Field<int>("QuestionLevelID"),
-                        LevelName = row.Field<string>("QuestionLevel")
+                        LevelName = row.Field<string>("QuestionLevel") ?? ""
                     }).ToList();
                 }
             }
@@ -247,7 +257,8 @@ namespace QuizManagment.Controllers
         private void UserDropDown()
         {
             ViewBag.UserList = new List<UserDropDown>();
-            string connectionString = _configuration.GetConnectionString("ConnectionString");
+            string connectionString = _configuration.GetConnectionString("ConnectionString")
+                ?? throw new InvalidOperationException("Connection string 'ConnectionString' not found.");
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             using (SqlCommand command = new SqlCommand("PR_USER_DROPDOWN", connection))
@@ -261,7 +272,7 @@ namespace QuizManagment.Controllers
                     ViewBag.UserList = dt.AsEnumerable().Select(row => new UserDropDown
                     {
                         UserID = row.Field<int>("UserID"),
-                        UserName = row.Field<string>("UserName")
+                        UserName = row.Field<string>("UserName") ?? ""
                     }).ToList();
                 }
             }

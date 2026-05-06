@@ -1,4 +1,4 @@
-﻿@model DataTable
+@model DataTable
 @using System.Data
 @{
     ViewData["Title"] = "Question List";
@@ -143,12 +143,13 @@
                                                        class="btn btn-outline-primary btn-sm">
                                                         <i class="bi bi-pencil"></i>
                                                     </a>
-                                                    <a asp-controller="Question" asp-action="Delete"
-                                                       asp-route-QuestionID="@dataRow["QuestionID"]"
-                                                       class="btn btn-outline-danger btn-sm"
-                                                       onclick="return confirm('Are you sure you want to delete this user?');">
-                                                        <i class="bi bi-x"></i>
-                                                    </a>
+                                                    <form asp-controller="Question" asp-action="Delete" method="post" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this question?');">
+                                                        @Html.AntiForgeryToken()
+                                                        <input type="hidden" name="QuestionID" value="@dataRow["QuestionID"]" />
+                                                        <button type="submit" class="btn btn-outline-danger btn-sm">
+                                                            <i class="bi bi-x"></i>
+                                                        </button>
+                                                    </form>
                                                 </div>
                                             </td>
                                         </tr>
